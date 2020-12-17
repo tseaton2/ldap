@@ -16,6 +16,8 @@ RUN apt-get update && \
 	#Adding slapd and ldap-utils for ldap
 	slapd \
 	ldap-utils \
+	tree \
+	
     && apt-get clean
 
 # Start ssh on startup
@@ -25,9 +27,9 @@ RUN apt-get update && \
 COPY start_ssh_server.sh /usr/local/bin/before-notebook.d/start_ssh_server.sh
 #______________________________________________
 #Create directories
-COPY schema -r /home/jovyan/etc/ldap/.
+COPY schema -r /home/jovyan/etc/ldap/
 
-COPY slapd.d -r /home/jovyan/etc/ldap/.
+COPY slapd.d -r /home/jovyan/etc/ldap/
 
 #Start slapd
 COPY start_slapd.sh /home/jovyan/etc/
